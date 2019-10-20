@@ -11,11 +11,15 @@ void print_roman(int32_t input_number);
 /* Driver program */
 int main()
 {
-    print_roman(0);
+    int32_t input;
+    printf("Please enter value :\n");
+    scanf("%d", &input);
+
+    print_roman(input);
     return 0;
 }
 
-/* unction to convert decimal to Roman Numerals */
+/* function to convert decimal to Roman Numerals */
 void print_roman(int32_t input_number)
 {
     size_t index = LAST_INDEX;
