@@ -17,7 +17,7 @@ int main()
 /* unction to convert decimal to Roman Numerals */
 void print_roman(int input_number)
 {
-    int index = LAST_INDEX;
+    size_t index = LAST_INDEX;
 
     if (input_number == 0)
     {
