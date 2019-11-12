@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <ctype.h>
 
 #define LAST_INDEX 12
+#define INPUT_MAX_SIZE 32
 
 int number_buffer[] = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
 char* symbol_buffer[] = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
@@ -14,11 +16,27 @@ int is_number(const char* input_buffer);
 /* Driver program */
 int main()
 {
-    int32_t input;
-    printf("Please enter value :\n");
-    scanf("%d", &input);
+    char input[INPUT_MAX_SIZE];
+    int64_t input_int;
 
-    print_roman(input);
+    puts("Please enter value:");
+    if (NULL == fgets(input, INPUT_MAX_SIZE, stdin))
+    {
+      fprintf(stderr, "Error occured while reading input.\n");
+      return -1;
+    }
+
+    /* removing trailing newline */
+    input[strcspn(input, "\n")] = '\0';
+
+    if (0 != is_number(input))
+    {
+      fprintf(stderr, "Error occured while validating: '%s' is not a number.\n", input);
+      return -2;
+    }
+
+    input_int = strtol(input, NULL, 10);
+    print_roman(input_int);
     return 0;
 }
 
