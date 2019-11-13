@@ -106,7 +106,8 @@ char* strtorom(const char* input_buffer)
   /* If converted number equals to 0 then there is no point to continue main loop. */
   if (input_number == 0)
   {
-    result_buffer = "0\0";
+    result_buffer[0] = '0';
+    result_buffer[1] = '\0';
     return result_buffer;
   }
 
