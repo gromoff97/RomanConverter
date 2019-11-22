@@ -6,6 +6,7 @@
 
 #define LAST_INDEX 12
 #define INPUT_MAX_SIZE 32
+#define ROMAN_BUFFER_MAX_SIZE 256
 
 int numbers_buffer[] = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
 char* symbols_buffer[] = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
@@ -91,7 +92,7 @@ char* strtorom(const char* input_buffer)
   int64_t input_number;
 
   /* Represents the offset in buffers describing relation between decimal numbers and roman numbers. */
-  size_t numbers_index;
+  size_t numbers_counter;
 
   /* Validating function's argument. */
   if (0 != is_number(input_buffer))
@@ -100,44 +101,33 @@ char* strtorom(const char* input_buffer)
   /* Converting char buffer to integer. */
   input_number = strtol(input_buffer, NULL, 10);
 
-  /* Allocating enough memory for result. */
-  result_buffer = malloc(sizeof(char) * 1024);
-
-  /* If converted number equals to 0 then there is no point to continue main loop. */
-  if (input_number == 0)
-  {
-    result_buffer[0] = '0';
-    result_buffer[1] = '\0';
-    return result_buffer;
-  }
-
-  /* If converted number is less than zero then add 'minus'-symbol to start of result buffer before main loop. */
-  if (input_number < 0)
-  {
-    result_buffer[0] = '-';
-    input_number = -input_number;
-  }
+  /* If number is less than or equals to 0 then exit. */
+  if (input_number <= 0)
+    return NULL;
 
   /* Assigning to last element's index because this is how main loop works.*/
-  numbers_index = LAST_INDEX;
+  numbers_counter = LAST_INDEX;
 
-  /* If 'minus'-symbol exists in result buffer then set offset to 1. Otherwise set to 0 */
-  result_counter = (result_buffer[0] == '-') ? 1 : 0;
+  /* Allocating enough memory for result. */
+  result_buffer = malloc(sizeof(char) * ROMAN_BUFFER_MAX_SIZE);
+
+  /* Setting start index for result buffer */
+  result_counter = 0;
 
   /* Main loop. */
   while (input_number > 0)
   {
-    int64_t div = input_number / numbers_buffer[numbers_index];
+    int64_t div = input_number / numbers_buffer[numbers_counter];
 
     while (div != 0)
     {
-      strcat(&result_buffer[result_counter], symbols_buffer[numbers_index]);
-      result_counter += strlen(symbols_buffer[numbers_index]);
+      strcat(&result_buffer[result_counter], symbols_buffer[numbers_counter]);
+      result_counter += strlen(symbols_buffer[numbers_counter]);
       div--;
     }
 
-    input_number = input_number % numbers_buffer[numbers_index];
-    numbers_index--;
+    input_number = input_number % numbers_buffer[numbers_counter];
+    numbers_counter--;
   }
 
   return result_buffer;
