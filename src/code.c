@@ -111,6 +111,9 @@ char* strtorom(const char* input_buffer)
   /* Allocating enough memory for result. */
   result_buffer = malloc(sizeof(char) * ROMAN_BUFFER_MAX_SIZE);
 
+  if (NULL == result_buffer)
+    return NULL;
+
   /* Setting start index for result buffer */
   result_counter = 0;
 
