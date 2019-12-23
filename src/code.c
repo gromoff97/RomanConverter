@@ -95,8 +95,8 @@ char* strtorom(const char* input_buffer)
   /* Converting char buffer to integer. */
   input_number = strtol(input_buffer, NULL, 10);
 
-  /* If number is less than or equals to 0 then exit. */
-  if (input_number <= 0)
+  /* If number is greater than 3999 then exit. */
+  if (input_number > 3999)
     return NULL;
 
   /* Assigning to last element's index because this is how main loop works.*/
