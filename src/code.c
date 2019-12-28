@@ -68,7 +68,7 @@ int is_positive_number(const char* input_buffer)
 
   for (char_counter = 0; char_counter < input_buffer_length; char_counter++)
     if (0 == isdigit(input_buffer[char_counter]))
-      return -4;
+      return -3;
 
   return 0;
 }
