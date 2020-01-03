@@ -12,7 +12,7 @@ char* strtorom(const char*);
 void print_roman(int32_t);
 int is_positive_number(const char*);
 
-extern const int numbers_buffer[BUFFS_SIZE];
-extern const char* const symbols_buffer[BUFFS_SIZE];
+extern const int NUMBERS_BUFFER[BUFFS_SIZE];
+extern const char* const SYMBOLS_BUFFER[BUFFS_SIZE];
 
 #endif

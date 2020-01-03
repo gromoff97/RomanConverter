@@ -6,8 +6,8 @@
 /* custom header-file */
 #include <cnvtorom.h>
 
-const int numbers_buffer[BUFFS_SIZE] = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
-const char* const symbols_buffer[BUFFS_SIZE] = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
+const int NUMBERS_BUFFER[BUFFS_SIZE] = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
+const char* const SYMBOLS_BUFFER[BUFFS_SIZE] = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
 
 int is_positive_number(const char* input_buffer)
 {
@@ -70,16 +70,16 @@ char* strtorom(const char* input_buffer)
   /* Main loop. */
   while (input_number > 0)
   {
-    int64_t div = input_number / numbers_buffer[numbers_counter];
+    int64_t div = input_number / NUMBERS_BUFFER[numbers_counter];
 
     while (div != 0)
     {
-      strcat(&result_buffer[result_counter], symbols_buffer[numbers_counter]);
-      result_counter += strlen(symbols_buffer[numbers_counter]);
+      strcat(&result_buffer[result_counter], SYMBOLS_BUFFER[numbers_counter]);
+      result_counter += strlen(SYMBOLS_BUFFER[numbers_counter]);
       div--;
     }
 
-    input_number = input_number % numbers_buffer[numbers_counter];
+    input_number = input_number % NUMBERS_BUFFER[numbers_counter];
     numbers_counter--;
   }
 
